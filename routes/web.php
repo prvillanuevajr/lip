@@ -1,5 +1,7 @@
 <?php
 
+use Illuminate\Support\Facades\Route;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -18,3 +20,10 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::prefix('admin/')->name('admin.')->middleware('auth')->group(function () {
+    Route::name('brand')->group(function () {
+        Route::get('brand','BrandController@index');
+        Route::post('brand','BrandController@store');
+    });
+});
