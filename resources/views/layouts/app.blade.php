@@ -10,7 +10,6 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -18,6 +17,7 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('datatables.min.css') }}" rel="stylesheet">
 </head>
 <body>
     <div id="app">
@@ -50,10 +50,13 @@
                             @endif
                         @else
                             <li class="nav-item">
-                                <a href="{{route('admin.brand')}}" class="nav-link">Manage Brands</a>
+                                <a href="{{route('admin.brand')}}" class="nav-link">Brands</a>
                             </li>
                             <li class="nav-item">
-                                <a href="{{route('admin.brand')}}" class="nav-link">Manage Products</a>
+                                <a href="{{route('admin.finish')}}" class="nav-link">Finishes</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{route('admin.lipstick')}}" class="nav-link">Lipstick</a>
                             </li>
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
@@ -85,5 +88,9 @@
             </div>
         </main>
     </div>
+    <script src="{{ asset('js/app.js') }}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
+    <script src="{{ asset('datatables.min.js') }}"></script>
+    @yield('scripts')
 </body>
 </html>
