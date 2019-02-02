@@ -21,7 +21,8 @@ window.Vue = require('vue');
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
 Vue.component('example-component', require('./components/ExampleComponent.vue').default);
-Vue.component('admin-manage-brand', require('./components/AdminManageBrand.vue').default);
+Vue.component('products-list', require('./components/Products.vue').default);
+Vue.component('cart-index', require('./components/Cart.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

@@ -17,14 +17,19 @@
                         <thead>
                         <th>Name</th>
                         <th>Date Created</th>
+                        <th>Actions</th>
                         </thead>
                         <tbody>
                         @foreach($brands as $brand)
                             <tr>
                                 <td>{{$brand->name}}</td>
                                 <td>{{$brand->created_at->diffForHumans()}}</td>
+                                <td>
+                                    <button class="btn btn-danger btn-sm fa fa-remove"></button>
+                                    <button class="btn btn-dark btn-sm fa fa-pencil"></button>
+                                </td>
                             </tr>
-                            @endforeach
+                        @endforeach
                         </tbody>
                     </table>
                 </div>

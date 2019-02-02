@@ -6,6 +6,7 @@ use App\Brand;
 use App\Finish;
 use App\Lipstick;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class LipstickController extends Controller
 {
@@ -95,6 +96,7 @@ class LipstickController extends Controller
      */
     public function destroy(Lipstick $lipstick)
     {
-        //
+        Storage::delete($lipstick->image);
+        $lipstick->forceDelete();
     }
 }

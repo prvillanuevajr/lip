@@ -85,6 +85,6 @@ class FinishController extends Controller
      */
     public function destroy(Finish $finish)
     {
-        //
+        $finish->forceDelete();
     }
 }

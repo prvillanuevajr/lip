@@ -24,6 +24,7 @@
         "vue-template-compiler": "^2.5.22"
     },
     "dependencies": {
+        "font-awesome": "^4.7.0",
         "moment": "^2.24.0",
         "sweetalert2": "^8.0.1"
     }

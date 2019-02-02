@@ -23,6 +23,13 @@ class CreateLipsticksTable extends Migration
             $table->string('color');
             $table->string('image');
             $table->timestamps();
+
+            $table->foreign('brand_id')
+                ->references('id')->on('brands')
+                ->onDelete('cascade');
+            $table->foreign('finish_id')
+                ->references('id')->on('finishes')
+                ->onDelete('cascade');
         });
     }
 

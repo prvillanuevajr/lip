@@ -1,45 +1,45 @@
 @extends('layouts.app')
 @section('content')
     <div class="row">
+        <div class="col-md-12 d-flex align-items-center">
+            <h1 class="flex-md-grow-1">Manage Products</h1>
+            <button id="addBtn" class="btn-sm btn-dark">add</button>
+        </div>
         <div class="col-md-12">
-            <h1>Manage Products</h1>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-2">
-            <button id="addBtn" class="btn btnsm btn-dark btn-block">ADD</button>
-        </div>
-        <div class="col-md-10">
             <div class="card">
                 <div class="card-header">
-                    Lip sticks
+
                 </div>
                 <div class="card-body">
-                    <div class="row">
+                    <table class="table-sm table table-bordered">
+                        <thead>
+                        <th>#</th>
+                        <th>Image</th>
+                        <th>Brand</th>
+                        <th>Finish</th>
+                        <th>Price</th>
+                        <th>Action</th>
+                        </thead>
+                        <tbody>
                         @foreach($lipsticks as $lipstick)
-                            <div class="col-lg-3">
-                                <div class="card">
-                                    <div class="card-body text-center">
-                                        <h5 class="card-title">{{$lipstick->name}}</h5>
-                                        <img class="card_product_image" src="/storage/{{$lipstick->image}}" alt="">
-                                    </div>
-                                    <ul class="list-group list-group-flush">
-                                        <li class="list-group-item">${{$lipstick->price}}</li>
-                                        <li class="list-group-item"><div class="card" style="background: {{$lipstick->color}};"><div class="card-header"></div></div></li>
-                                    </ul>
-                                    <div class="card-body">
-                                        <button class="btn btn-sm btn-dark">Edit</button>
-                                        <a href="#" class="btn btn-sm btn-dark">Remove</a>
-                                    </div>
-                                </div>
-                            </div>
+                            <tr>
+                                <td>{{$lipstick->id}}</td>
+                                <td class="text-center"><img style="border-radius: 50%" width="32px" src="/storage/{{$lipstick->image}}" alt=""></td>
+                                <td><span class="badge badge-dark">{{$lipstick->brand->name}}</span></td>
+                                <td><span class="badge-dark badge">{{$lipstick->finish->name}}</span></td>
+                                <td>${{$lipstick->price}}</td>
+                                <td>
+                                    <button data-content="{{$lipstick->id}}" class="btn btn-danger removebtn btn-sm"><i class="fa fa-remove"></i></button>
+                                    <button class="btn btn-dark btn-sm"><i class="fa fa-pencil"></i></button>
+                                </td>
+                            </tr>
                         @endforeach
-                    </div>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
     </div>
-    {{--MODAL--}}
     {{--MODAL--}}
     <div id="MODAL" class="modal fade">
         <div class="modal-dialog">
@@ -50,7 +50,8 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form id="addform" action="{{route('admin.lipstick')}}" method="post" enctype="multipart/form-data">
+                    <form id="addform" action="{{route('admin.lipstick')}}" method="post"
+                          enctype="multipart/form-data">
                         @csrf
                         <div class="form-group">
                             <label for="brand_id">Brand</label>
@@ -105,6 +106,14 @@
     <script>
         $('#addBtn').click(function () {
             $('#MODAL').modal('show');
+        })
+        $('.table').DataTable()
+        $('.removebtn').click(function () {
+            if (!confirm('Remove this item?')) {
+                return false
+            }
+            axios.delete(`/admin/lipstick/${$(this).attr('data-content')}`)
+                .then(window.location.reload(true));
         })
     </script>
 @endsection

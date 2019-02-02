@@ -17,12 +17,18 @@
                         <thead>
                         <th>Name</th>
                         <th>Description</th>
+                        <th>Action</th>
                         </thead>
                         <tbody>
                         @foreach($finishes as $finish)
                             <tr>
                                 <td>{{$finish->name}}</td>
                                 <td>{{$finish->description}}</td>
+                                <td>
+                                    <button data-content="{{$finish->id}}"
+                                            class="deletebtn btn btn-danger btn-sm fa fa-remove"></button>
+                                    <button class="btn btn-dark btn-sm fa fa-pencil"></button>
+                                </td>
                             </tr>
                         @endforeach
                         </tbody>
@@ -66,5 +72,12 @@
             $('#MODAL').modal('show')
         })
         $('.table').DataTable()
+        $('.deletebtn').click(function () {
+            if (!confirm('Remove this item?')) {
+                return false
+            }
+            axios.delete(`/admin/finish/${$(this).attr('data-content')}`)
+                .then(window.location.reload(true));
+        })
     </script>
 @endsection
