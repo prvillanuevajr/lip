@@ -10,7 +10,6 @@ class CartController extends Controller
 {
     public function index()
     {
-//        $cart = auth()->user()->cart;
         return view('cart.index');
     }
 
@@ -32,7 +31,7 @@ class CartController extends Controller
             $cart = auth()->user()->cart()->where('lipstick_id', $lipstick->id)->first();
             $cart->quantity++;
             $cart->save();
-            $this->index();
+            return redirect('/cart');
         }
     }
 }

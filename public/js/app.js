@@ -1842,7 +1842,7 @@ __webpack_require__.r(__webpack_exports__);
         return item.quantity * item.lipstick.price;
       }).reduce(function (a, b) {
         return a + b;
-      });
+      }, 0);
     }
   }
 });

@@ -72,7 +72,7 @@
         },
         computed: {
             totalPrice() {
-                return this.items.map(item => item.quantity * item.lipstick.price).reduce((a, b) => a + b)
+                return this.items.map(item => item.quantity * item.lipstick.price).reduce((a, b) => a + b, 0)
             }
         }
     }
