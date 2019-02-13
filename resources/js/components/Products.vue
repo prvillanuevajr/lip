@@ -45,11 +45,11 @@
         </div>
         <div class="col-lg-9">
             <div class="row">
-                <div v-for="product in filteredProducts" class="col-lg-4">
+                <div v-for="product in filteredProducts" class="col-lg-4 pb-4">
                     <a :href="`/product/${product.id}`" class="card">
                         <div class="card-body">
                             <div class="d-flex">
-                                <img class="flex-grow-1" style="max-height: 128px" :src="`/storage/${product.image}`"
+                                <img class="flex-grow-1 p-2" style="max-height: 128px" :src="`/storage/${product.image}`"
                                      alt="">
                                 <div class="d-flex flex-column justify-content-between flex-grow-1">
                                     <div>
@@ -80,6 +80,7 @@
         },
         created() {
             this.fetch()
+            console.log(this.produts)
         },
         methods: {
             fetch() {

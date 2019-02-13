@@ -1,12 +1,12 @@
 <template>
     <div class="row">
-        <div class="col-lg-8 offset-lg-2">
+        <div class="col-lg-12">
             <div class="card">
                 <div class="card-header">
                     My Cart <i class="fa fa-shopping-cart"></i>
                 </div>
                 <div class="card-body">
-                    <table class="table table-sm table-bordered table-hover">
+                    <table class="table table-bordered table-hover">
                         <thead>
                         <th></th>
                         <th>Name</th>
@@ -24,7 +24,22 @@
                             <td>{{item.lipstick.brand.name}}</td>
                             <td>{{item.lipstick.finish.name}}</td>
                             <td>{{item.lipstick.price}}</td>
-                            <td><input type="number" v-model="item.quantity"></td>
+                            <td>
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <button class="btn btn-outline-secondary" type="button"
+                                                @click="deduct(item, index)">-
+                                        </button>
+                                    </div>
+                                    <input readonly type="number" v-model="item.quantity"
+                                           class="form-control text-center">
+                                    <div class="input-group-append">
+                                        <button class="btn btn-outline-secondary" type="button"
+                                                @click="item.quantity++">+
+                                        </button>
+                                    </div>
+                                </div>
+                            </td>
                             <td>{{item.quantity * item.lipstick.price}}</td>
                             <td>
                                 <button @click="removeItem(index)" class="btn btn-dark btn-sm"><i
@@ -67,12 +82,27 @@
                     })
             },
             removeItem(index) {
-                this.items.splice(index, 1)
+                axios.post('/cart/delete', {id: this.items[index].id})
+                    .then(({data}) => this.items.splice(index, 1))
+            },
+            deduct(item, index) {
+                if (item.quantity === 1) {
+                    this.removeItem(index)
+                }
+                else {
+                    item.quantity--
+                }
             }
         },
         computed: {
             totalPrice() {
                 return this.items.map(item => item.quantity * item.lipstick.price).reduce((a, b) => a + b, 0)
+            }
+        },
+        watch: {
+            totalPrice() {
+                axios.post('/cart/update', {items: this.items})
+                    .then(({data}) => console.log(data));
             }
         }
     }
