@@ -61,29 +61,34 @@
                         <li class="nav-item">
                             <a href="{{route('admin.lipstick')}}" class="nav-link">Lipstick</a>
                         </li>
-                        @endadmin
-                        <li class="nav-item">
-                            <a href="{{route('cart')}}" class="nav-link">My Cart <i class="fa fa-shopping-cart"></i></a>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
-                               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                {{ Auth::user()->name }} <span class="caret"></span>
-                            </a>
+                        @else
+                            <li class="nav-item">
+                                <a href="{{route('cart')}}" class="nav-link">My Cart <i class="fa fa-shopping-cart"></i></a>
+                            </li>
+                            @endadmin
 
-                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="{{ route('logout') }}"
-                                   onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                    {{ __('Logout') }}
+                            <li class="nav-item">
+                                <a href="/transaction" class="nav-link">Purchase history <i class="fa fa-history"></i></a>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
+                                   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                    {{ Auth::user()->name }} <span class="caret"></span>
                                 </a>
-                                <form id="logout-form" action="{{ route('logout') }}" method="POST"
-                                      style="display: none;">
-                                    @csrf
-                                </form>
-                            </div>
-                        </li>
-                    @endguest
+
+                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="{{ route('logout') }}"
+                                       onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                                        {{ __('Logout') }}
+                                    </a>
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST"
+                                          style="display: none;">
+                                        @csrf
+                                    </form>
+                                </div>
+                            </li>
+                        @endguest
                 </ul>
             </div>
         </div>

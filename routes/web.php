@@ -44,8 +44,14 @@ Route::prefix('product/')->group(function () {
 
 Route::prefix('cart/')->name('cart')->middleware('auth')->group(function () {
     Route::get('', 'CartController@index');
-    Route::post('', 'CartController@store')->name('.post');
+    Route::post('', 'CartController@store');
     Route::post('/update', 'CartController@update')->name('.update');
     Route::post('/delete', 'CartController@delete')->name('.delete');
     Route::get('/list', 'CartController@list')->name('.list');
+});
+
+Route::prefix('transaction/')->name('transaction')->middleware('auth')->group(function () {
+    Route::get('', 'TransactionController@index');
+    Route::post('', 'TransactionController@store');
+    Route::get('/{transaction}', 'TransactionController@show');
 });

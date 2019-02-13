@@ -3168,6 +3168,23 @@
   background-color: #79b0a1;
 }
 
+.invoice-title h2,
+.invoice-title h3 {
+  display: inline-block;
+}
+
+.transaction > tbody > tr > .no-line {
+  border-top: none;
+}
+
+.transaction > thead > tr > .no-line {
+  border-bottom: none;
+}
+
+.transaction > tbody > tr > .thick-line {
+  border-top: 2px solid;
+}
+
 /*!
  * Bootstrap v4.2.1 (https://getbootstrap.com/)
  * Copyright 2011-2018 The Bootstrap Authors

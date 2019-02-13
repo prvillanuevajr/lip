@@ -57,7 +57,7 @@
                     </table>
                 </div>
                 <div class="card-footer">
-                    <button class="btn btn-sm btn-dark float-right">Check Out</button>
+                    <button class="btn btn-sm btn-dark float-right" @click="checkOut">Check Out</button>
                 </div>
             </div>
         </div>
@@ -92,6 +92,10 @@
                 else {
                     item.quantity--
                 }
+            },
+            checkOut() {
+                axios.post('/transaction')
+                    .then(({data}) => window.location.href = `/transaction/${data}`);
             }
         },
         computed: {
@@ -102,7 +106,6 @@
         watch: {
             totalPrice() {
                 axios.post('/cart/update', {items: this.items})
-                    .then(({data}) => console.log(data));
             }
         }
     }

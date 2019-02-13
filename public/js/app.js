@@ -1863,6 +1863,12 @@ __webpack_require__.r(__webpack_exports__);
       } else {
         item.quantity--;
       }
+    },
+    checkOut: function checkOut() {
+      axios.post('/transaction').then(function (_ref3) {
+        var data = _ref3.data;
+        return window.location.href = "/transaction/".concat(data);
+      });
     }
   },
   computed: {
@@ -1878,9 +1884,6 @@ __webpack_require__.r(__webpack_exports__);
     totalPrice: function totalPrice() {
       axios.post('/cart/update', {
         items: this.items
-      }).then(function (_ref3) {
-        var data = _ref3.data;
-        return console.log(data);
       });
     }
   }
@@ -55309,7 +55312,16 @@ var render = function() {
           ])
         ]),
         _vm._v(" "),
-        _vm._m(2)
+        _c("div", { staticClass: "card-footer" }, [
+          _c(
+            "button",
+            {
+              staticClass: "btn btn-sm btn-dark float-right",
+              on: { click: _vm.checkOut }
+            },
+            [_vm._v("Check Out")]
+          )
+        ])
       ])
     ])
   ])
@@ -55344,16 +55356,6 @@ var staticRenderFns = [
       _c("th", [_vm._v("Total")]),
       _vm._v(" "),
       _c("th")
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "card-footer" }, [
-      _c("button", { staticClass: "btn btn-sm btn-dark float-right" }, [
-        _vm._v("Check Out")
-      ])
     ])
   }
 ]
